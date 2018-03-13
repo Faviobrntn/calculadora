@@ -1,0 +1,159 @@
+<!-- 
+/**
+ * Calculadora
+ *
+ * Autor: Favio Barnatan
+ * Fecha: 03/2018
+ **/-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Calculadora</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Favio Barnatan">
+    <meta name="application-name" content="Calculadora JS">
+    <meta name="description" content="Calculadora JS de Favio con memoria">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/calculadora.css">
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/calculadora.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <nav class="navbar navbar-inverse ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">Favio</a>
+                </div>
+            </div>
+        </nav>
+        
+
+        <section class="contenedor">
+            <div class="col-sm-6" id="calculadora">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-8">
+                        <p>Número:</p>
+                        <div contentEditable="false" class="col-xs-12 form-control" id="box_num" style="height: 70px;">
+                            <input type="hidden" name="calculos" id="calculos" value="">
+                            <span id="cuentas" class="col-xs-12" style="color: grey;"></span>
+                            <span id="resultado" class="pull-right" style="font-size:x-large; color:black; z-index:99">0</span>
+                        </div>
+                        <button class="btn btn-xs btn-default pull-right" id="toM">ToM --></button>
+                        <br>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <p>Memoria:</p>
+                        <div contentEditable="false" class="col-xs-12 form-control" style="height: 70px; font-size: x-large;color: black;">
+                            <span class="col-xs-12" id="memoria" style="height: 100%;  width:100%;"></span>
+                        </div>
+                        <button class="btn btn-xs btn-default pull-left" id="fromM"><-- FromM</button>
+                        <button class="btn btn-xs btn-default pull-right" id="clearM">Limpiar</button>
+                        <br>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="sumatoria">Σx</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="producto">P(x)</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default boton-blanco" disabled>&nbsp;</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-danger"  id="ac">AC</span> 
+                </div>
+                <div class="row">
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="parte_entera">Ent(x)</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="inverso">1/x</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="factorial">n!</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-warning" id="c"><--</span>
+                    
+                </div>
+                <div class="row">
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="pot_cuadrada">2<sup>n</sup></span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="raiz">√x</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="cuadrado">x<sup>2</sup></span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary" id="eleva">x<sup>y</sup></span>
+                </div>
+                <div class="row">
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">7</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">8</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">9</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary btn-valor" id="division">/</span>
+                </div>
+                <div class="row">
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">4</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">5</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">6</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary btn-valor" id="multiplicacion">*</span>
+                </div>
+                <div class="row">
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">1</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">2</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">3</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary btn-valor" id="menos">-</span>
+                </div>
+                <div class="row">
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">0</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">.</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-default btn-valor">,</span>
+                    <span class="col-xs-3 col-sm-3 btn btn-primary btn-valor" id="mas">+</span>
+                </div>
+                
+                <div style="clear:both; height: 30px;"></div>
+                <div class="row">
+                    <span class="col-xs-3 col-sm-3 btn btn-block btn-primary" id="calcular">=</span>
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div id="instrucciones">
+                    
+                    <h2>Instrucciones de uso:</h2>
+                    <hr>
+                    <p><b>Operaciones unitarias (con un solo operando): </b></p>
+                    <ul>
+                        <li>Ingresar el número.</li>
+                        <li>Seleccionar la operación</li>
+                        <li>Instantaneamente aparecera el resultado en el box.</li>
+                    </ul>
+                    <br>
+                    <p><b>Operaciones binarias (con dos operandos):</b></p>
+                    <ul>
+                        <li>Ingresar el primer número.</li>
+                        <li>Seleccionar la operación</li>
+                        <li>Ingresar el otro número en el box.</li>
+                        <li>Presionar el boton igual( = ) acto seguido veras el resultado en el box.</li>
+                    </ul>
+                    <br>
+                    <p><b>Operaciones n-arias (Σx ó P(x)) introducidos en formato CSV:</b></p>
+                    <ul>
+                        <li>Ingresar los números que desees sumar/multiplicar separados por coma (,) en el box.</li>
+                        <li>Seleccionar la operación Σx ó P(x)</li>
+                        <li>Instantaneamente aparecera el resultado en el box.</li>
+                    </ul>
+                    <br>
+                    <p><b>Utilización de la Memoría: <small>(*Solo almacena un valor)</small></b></p>
+                    <ul>
+                        <li>Luego de una operación, si desea guardar el resultado presione "ToM -->".</li>
+                        <li>Para utilizar un dato guardado de la memoría presione "<-- FromM"</li>
+                        <li>Para limpiar la memoria, simplemente presionando "Limpiar" </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+    <div class="panel-footer">
+        <span><a href="#">Calculadora JS</a> - 2018</span>
+        <span style="float: right;">Usuario: <a href="https://github.com/Faviobrntn/calculadora" target="_black">Favio Barnatan</a></span>
+    </div>
+</body>
+</html>
